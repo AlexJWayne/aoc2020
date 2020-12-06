@@ -26,12 +26,12 @@ export function findSumProduct3(numbers: number[], sum: number): number {
   throw new Error(`No 2 numbers had a sum of ${sum}`)
 }
 
-export function solve1(input: string): number | undefined {
+export function solve1(input: string): number {
   const numbers = parseInput(input)
   return findSumProduct2(numbers, 2020)
 }
 
-export function solve2(input: string): number | undefined {
+export function solve2(input: string): number {
   const numbers = parseInput(input)
   return findSumProduct3(numbers, 2020)
 }
