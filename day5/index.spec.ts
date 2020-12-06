@@ -1,5 +1,4 @@
 import { describeDay } from "../spec-helper"
-
 import { solve1, solve2, toInt } from "."
 
 describeDay(
@@ -16,7 +15,7 @@ describeDay(
   () => {
     describe("toInt", () => {
       it("parses FBLR as binary", () => {
-        expect(toInt("FFFBLR")).toEqual(11)
+        expect(toInt("FFFBLR")).toEqual(5)
       })
     })
   },

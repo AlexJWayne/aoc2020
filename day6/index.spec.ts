@@ -1,5 +1,4 @@
 import { describeDay } from "../spec-helper"
-
 import { countAnd, countOr, solve1, solve2 } from "."
 
 describeDay(
