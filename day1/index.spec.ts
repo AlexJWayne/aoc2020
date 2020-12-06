@@ -32,7 +32,7 @@ describe("day1", () => {
     })
   })
 
-  describe("part1", () => {
+  describe("part 1", () => {
     it("finds the product of the two numbers that add up to 2020", () => {
       expect(solve1(sample)).toEqual(514579)
     })
