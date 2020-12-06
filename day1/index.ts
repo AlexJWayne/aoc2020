@@ -1,35 +1,43 @@
-// Specifically, they need you to find the two entries that sum to 2020 and then multiply those two numbers together.
+import { readInput } from "../common"
 
-import fs from "fs"
-
-function getInput(): number[] {
-  return fs
-    .readFileSync(__dirname + "/input.txt")
-    .toString()
-    .split("\n")
-    .map(str => parseInt(str, 10))
+function parseInput(input: string): number[] {
+  return input.split("\n").map(str => parseInt(str, 10))
 }
 
-function solve(): number | undefined {
-  const numbers = getInput()
+export function findSumProduct2(numbers: number[], sum: number): number {
   for (const a of numbers) {
     for (const b of numbers) {
-      if (a + b === 2020) return a * b
+      if (a + b === sum) return a * b
     }
   }
+  throw new Error(`No 2 numbers had a sum of ${sum}`)
 }
 
-function solve2(): number | undefined {
-  const numbers = getInput()
-
+export function findSumProduct3(numbers: number[], sum: number): number {
   for (const a of numbers) {
     for (const b of numbers) {
       for (const c of numbers) {
-        if (a + b + c === 2020) return a * b * c
+        if (a + b + c === sum) {
+          return a * b * c
+        }
       }
     }
   }
+  throw new Error(`No 2 numbers had a sum of ${sum}`)
 }
 
-console.log(solve())
-console.log(solve2())
+export function solve1(input: string): number | undefined {
+  const numbers = parseInput(input)
+  return findSumProduct2(numbers, 2020)
+}
+
+export function solve2(input: string): number | undefined {
+  const numbers = parseInput(input)
+  return findSumProduct3(numbers, 2020)
+}
+
+if (require.main === module) {
+  const input = readInput(__dirname)
+  console.log(solve1(input))
+  console.log(solve2(input))
+}
