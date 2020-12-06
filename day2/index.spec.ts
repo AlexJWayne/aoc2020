@@ -13,7 +13,7 @@ const sample = `
 2-9 c: ccccccccc
 `.trim()
 
-describe("day2", () => {
+describe("day 2", () => {
   describe("parseLine", () => {
     it("parses a line of pasword requirements and a password into a [number, number, string, string] tuple", () => {
       expect(parseLine("1-3 a: abcde")).toEqual([1, 3, "a", "abcde"])

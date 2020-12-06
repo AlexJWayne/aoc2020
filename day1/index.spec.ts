@@ -11,7 +11,7 @@ const sample = `
 1456
 `.trim()
 
-describe("day1", () => {
+describe("day 1", () => {
   describe("findSumProduct2", () => {
     it("returns the product of two integers that sum up to a number", () => {
       expect(findSumProduct2([1, 2, 3, 4, 5], 9)).toEqual(4 * 5)
