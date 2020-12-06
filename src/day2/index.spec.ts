@@ -1,4 +1,4 @@
-import { readInput } from "../common"
+import { describeDay } from "../spec-helper"
 import {
   parseLine,
   solve1,
@@ -6,7 +6,6 @@ import {
   validateCharacterLocations,
   validateMinMax,
 } from "."
-import { describeDay } from "../spec-helper"
 
 describeDay(
   2,

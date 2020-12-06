@@ -1,4 +1,4 @@
-import { readInput, readExample } from "./common"
+import { readInput, readExample } from "./read-files"
 
 /** Use this as the value of `example` to completely omit it from the tests. */
 export const ignore = Symbol("ignore")
