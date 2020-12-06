@@ -19,7 +19,9 @@ describeDay(
         expect(countOr("abc")).toEqual(3)
         expect(countOr("abc\nbcd")).toEqual(4)
       })
+    })
 
+    describe("countAnd", () => {
       it("counts the number of common yes answers", () => {
         expect(countAnd("abc")).toEqual(3)
         expect(countAnd("abc\nbcd")).toEqual(2)
