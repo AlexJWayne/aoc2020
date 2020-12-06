@@ -1,4 +1,4 @@
-import { describeDay } from "../spec-helper"
+import { describeDay, ignore } from "../spec-helper"
 import { solve1, solve2, toInt } from "."
 
 describeDay(
@@ -10,6 +10,7 @@ describeDay(
   },
   {
     solve: solve2,
+    example: ignore,
     puzzle: 615,
   },
   () => {

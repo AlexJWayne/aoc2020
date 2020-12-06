@@ -1,12 +1,15 @@
 import { readInput, readExample } from "./common"
 
+/** Use this as the value of `example` to completely omit it from the tests. */
+export const ignore = Symbol("ignore")
+
 /** A day parts solver, and expected example/puzzle answers to test. */
 interface TestPart {
   /** The function that executes this part's algorithm. */
   solve?: (input: string) => number
 
   /** The expected result from example. */
-  example?: number
+  example?: number | typeof ignore
 
   /** The expect result for the puzzle input. */
   puzzle?: number
@@ -41,11 +44,13 @@ function testPart(
   { solve, example, puzzle }: TestPart,
 ) {
   describe(`part ${name}`, () => {
-    const itExample = solve && example ? it : it.skip
-    itExample("finds the example answer", () => {
-      const actual = solve!(readExample(directory))
-      expect(actual).toEqual(example)
-    })
+    if (example !== ignore) {
+      const itExample = solve && example ? it : it.skip
+      itExample("finds the example answer", () => {
+        const actual = solve!(readExample(directory))
+        expect(actual).toEqual(example)
+      })
+    }
 
     const itPuzzle = solve && puzzle ? it : it.skip
     itPuzzle("finds the puzzle answer", () => {
