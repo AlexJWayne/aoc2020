@@ -10,5 +10,5 @@ export function readExample(directory: string): string {
 }
 
 function readFile(directory: string, filename: string): string {
-  return fs.readFileSync(path.join(directory, filename)).toString()
+  return fs.readFileSync(path.join(__dirname, directory, filename)).toString()
 }
