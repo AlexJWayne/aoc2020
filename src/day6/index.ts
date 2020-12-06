@@ -1,5 +1,3 @@
-import { readInput } from "../common"
-
 function getUniqueAnswers(group: string): Set<string> {
   return new Set(group.replace(/[\W]/g, "").split(""))
 }
@@ -27,9 +25,4 @@ export function solve1(input: string): number {
 export function solve2(input: string): number {
   const groups = input.split("\n\n")
   return groups.reduce((total, group) => total + countAnd(group), 0)
-}
-
-if (require.main === module) {
-  console.log(solve1(readInput(__dirname)))
-  console.log(solve2(readInput(__dirname)))
 }

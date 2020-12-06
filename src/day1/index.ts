@@ -1,5 +1,3 @@
-import { readInput } from "../common"
-
 function parseInput(input: string): number[] {
   return input.split("\n").map(str => parseInt(str, 10))
 }
@@ -34,10 +32,4 @@ export function solve1(input: string): number {
 export function solve2(input: string): number {
   const numbers = parseInput(input)
   return findSumProduct3(numbers, 2020)
-}
-
-if (require.main === module) {
-  const input = readInput(__dirname)
-  console.log(solve1(input))
-  console.log(solve2(input))
 }

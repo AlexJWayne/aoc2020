@@ -1,5 +1,3 @@
-import { readInput } from "../common"
-
 type Line = [number, number, string, string]
 
 function parseInput(input: string): Line[] {
@@ -39,9 +37,4 @@ export function solve2(input: string): number {
   return parseInput(input)
     .map(validateCharacterLocations)
     .filter(result => result).length
-}
-
-if (require.main === module) {
-  console.log(solve1(readInput(__dirname)))
-  console.log(solve2(readInput(__dirname)))
 }

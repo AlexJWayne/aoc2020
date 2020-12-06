@@ -1,5 +1,3 @@
-import { readInput } from "../common"
-
 export function countTrees(input: string, right: number, down: number): number {
   const grid = input.split("\n")
 
@@ -33,9 +31,4 @@ export function solve2(input: string): number {
     countTrees(input, 7, 1) *
     countTrees(input, 1, 2)
   )
-}
-
-if (require.main === module) {
-  console.log(solve1(readInput(__dirname)))
-  console.log(solve2(readInput(__dirname)))
 }
