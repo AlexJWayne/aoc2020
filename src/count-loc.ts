@@ -23,7 +23,7 @@ for (const day of getExistingDays()) {
     const lines = fs
       .readFileSync(path.join(__dirname, day, fileName)) // Load the file.
       .toString() // Convert the buffer to a string.
-      .replace(/\/\*(.|\n)*\*\//gm, "") // remove multilline block comments.
+      .replace(/\/\*(.|\n)*?\*\//gm, "") // remove multilline block comments.
       .split("\n") // Split into an array of lines.
       .filter(line => !/^\s*\/\//.test(line)) // Remove lines that are only comments.
       .filter(line => line.trim()) // Remove empty lines.
