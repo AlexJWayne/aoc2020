@@ -11,13 +11,13 @@ describeDay(
   ${day},
   {
     // solve: solve1,
-    // example: 0,
-    // puzzle: 0,
+    // example: 1,
+    // puzzle: 1,
   },
   {
     // solve: solve2,
-    // example: 0,
-    // puzzle: 0,
+    // example: 1,
+    // puzzle: 1,
   },
   () => {
     //...
@@ -28,12 +28,14 @@ describeDay(
 
 function genImpl(): string {
   return `
+/** Solve puzzle, part 1 */
 export function solve1(input: string): number {
-  return -1
+  return 0
 }
 
+/** Solve puzzle, part 2 */
 export function solve2(input: string): number {
-  return -1
+  return 0
 }
 `.trim()
 }
