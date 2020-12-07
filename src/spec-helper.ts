@@ -47,7 +47,7 @@ function testPart(
     if (example !== ignore) {
       const itExample = solve && example ? it : it.skip
       itExample("finds the example answer", () => {
-        const actual = solve!(readExample(directory))
+        const actual = solve!(readExample(directory, name))
         expect(actual).toEqual(example)
       })
     }
