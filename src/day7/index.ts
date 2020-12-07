@@ -1,49 +1,52 @@
-interface Rule {
-  color: string
-  contents: BagCount[] | null
-}
-
-interface BagCount {
-  count: number
-  color: string
-}
-
-// "2 muted yellow bags" => { color: 'muted yellow', count: 2 }
-export function parseCountedBag(bagString: string): BagCount {
-  return {
-    count: parseInt(bagString, 10),
-    color: bagString.replace(/^\d+ /, "").replace(/ bags?$/, ""),
+interface Rules {
+  // parent bag color
+  [color: string]: {
+    // contents colors and their counts
+    [color: string]: number
   }
 }
 
-export function parseLine(line: string): Rule {
-  const [color, contentsString] = line
-    .replace(/\.$/, "") // Remove ending period.
-    .split(" bags contain ") // Split the parent bag and bag contents.
-
-  let contents: BagCount[] | null = null
-  if (contentsString !== "no other bags") {
-    contents = contentsString.split(", ").map(parseCountedBag)
-  }
-
-  return {
-    color,
-    contents,
-  }
+// "2 muted yellow bags" => { ['muted yellow']: 2 }
+export function parseCountedBag(
+  bagString: string,
+): { [color: string]: number } {
+  const color = bagString.replace(/^\d+ /, "").replace(/ bags?$/, "")
+  const count = parseInt(bagString, 10)
+  return { [color]: count }
 }
 
-function search(rules: Rule[], color: string): Set<string> {
+export function parseLines(lines: string[]): Rules {
+  const result: Rules = {}
+
+  for (const line of lines) {
+    const [color, contentsString] = line
+      .replace(/\.$/, "") // Remove ending period.
+      .split(" bags contain ") // Split the parent bag and bag contents.
+
+    let contents: { [color: string]: number } = {}
+    if (contentsString !== "no other bags") {
+      for (const bagString of contentsString.split(", ")) {
+        contents = { ...contents, ...parseCountedBag(bagString) }
+      }
+    }
+    result[color] = contents
+  }
+
+  return result
+}
+
+export function search(rules: Rules, searchColor: string): Set<string> {
   const colors: Set<string> = new Set()
 
-  for (const rule of rules) {
+  for (const [bagColor, contents] of Object.entries(rules)) {
     // Check if this can contain other bags.
-    if (rule.contents) {
+    if (contents) {
       // Check if this bag contains the requested bag.
-      if (rule.contents.find(bag => bag.color === color)) {
-        // Add this bag as a possible container.
-        colors.add(rule.color)
-        // Add this bag's parents as possible containers
-        search(rules, rule.color).forEach(parent => colors.add(parent))
+      if (contents[searchColor]) {
+        // Add this bag as an allowed container.
+        colors.add(bagColor)
+        // Add this bags parents as allowed containers.
+        search(rules, bagColor).forEach(parent => colors.add(parent))
       }
     }
   }
@@ -52,7 +55,7 @@ function search(rules: Rule[], color: string): Set<string> {
 }
 
 export function solve1(input: string): number {
-  const lines = input.split("\n").map(parseLine)
+  const lines = parseLines(input.split("\n"))
   return search(lines, "shiny gold").size
 }
 

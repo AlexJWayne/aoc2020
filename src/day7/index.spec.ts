@@ -1,5 +1,5 @@
 import { describeDay } from "../spec-helper"
-import { parseCountedBag, parseLine, solve1, solve2 } from "."
+import { parseCountedBag, parseLines, search, solve1, solve2 } from "."
 
 describeDay(
   7,
@@ -14,47 +14,65 @@ describeDay(
     // puzzle: 0,
   },
   () => {
-    describe("parseCountedBag", () => {
-      it("parses a bag and count description", () => {
-        expect(parseCountedBag("1 light pinkish blue bag")).toEqual({
-          count: 1,
-          color: "light pinkish blue",
-        })
-        expect(parseCountedBag("4 green bags")).toEqual({
-          count: 4,
-          color: "green",
-        })
+    describe("search", () => {
+      it("finds all bags that contain a bag directly", () => {
+        expect(
+          search(
+            {
+              a: { b: 1 },
+            },
+            "b",
+          ),
+        ).toEqual(new Set(["a"]))
+      })
+      it("finds all bags that contain a bag directly and its parents bags", () => {
+        expect(
+          search(
+            {
+              a: { b: 1 },
+              b: { c: 2 },
+              c: { d: 3 },
+            },
+            "d",
+          ),
+        ).toEqual(new Set(["a", "b", "c"]))
       })
     })
 
-    describe("parseLine", () => {
+    describe("parseCountedBag", () => {
+      it("parses a bag and count description", () => {
+        expect(parseCountedBag("1 light pinkish blue bag")).toEqual({
+          "light pinkish blue": 1,
+        })
+        expect(parseCountedBag("4 green bags")).toEqual({ green: 4 })
+      })
+    })
+
+    describe("parseLines", () => {
       it("parses a bag that contains no other bags", () => {
-        expect(parseLine("faded blue bags contain no other bags.")).toEqual({
-          color: "faded blue",
-          contents: null,
+        expect(parseLines(["faded blue bags contain no other bags."])).toEqual({
+          "faded blue": {},
         })
       })
 
       it("parses a bag that contains one other bag color", () => {
         expect(
-          parseLine("bright white bags contain 1 shiny gold bag."),
+          parseLines(["bright white bags contain 1 shiny gold bag."]),
         ).toEqual({
-          color: "bright white",
-          contents: [{ count: 1, color: "shiny gold" }],
+          "bright white": { "shiny gold": 1 },
         })
       })
 
       it("parses a bag that contains many other bag color", () => {
         expect(
-          parseLine(
+          parseLines([
             "muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.",
-          ),
+          ]),
         ).toEqual({
-          color: "muted yellow",
-          contents: [
-            { count: 2, color: "shiny gold" },
-            { count: 9, color: "faded blue" },
-          ],
+          "muted yellow": {
+            "shiny gold": 2,
+            "faded blue": 9,
+          },
         })
       })
     })
