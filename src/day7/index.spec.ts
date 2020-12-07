@@ -1,5 +1,5 @@
 import { describeDay } from "../spec-helper"
-import { parseCountedBag, parseLines, search, solve1, solve2 } from "."
+import { count, parseCountedBag, parseLines, search, solve1, solve2 } from "."
 
 describeDay(
   7,
@@ -9,9 +9,9 @@ describeDay(
     puzzle: 229,
   },
   {
-    // solve: solve2,
-    // example: 0,
-    // puzzle: 0,
+    solve: solve2,
+    example: 126,
+    puzzle: 6683,
   },
   () => {
     describe("search", () => {
@@ -20,6 +20,7 @@ describeDay(
           search(
             {
               a: { b: 1 },
+              b: {},
             },
             "b",
           ),
@@ -32,10 +33,27 @@ describeDay(
               a: { b: 1 },
               b: { c: 2 },
               c: { d: 3 },
+              d: {},
             },
             "d",
           ),
         ).toEqual(new Set(["a", "b", "c"]))
+      })
+    })
+
+    describe("count", () => {
+      it("counts all bags in a bag including the root bag", () => {
+        expect(
+          count(
+            {
+              a: { b: 1 },
+              b: { c: 2 },
+              c: { d: 3 },
+              d: {},
+            },
+            "a",
+          ),
+        ).toEqual(10)
       })
     })
 
