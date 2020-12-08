@@ -49,7 +49,7 @@ export function run(program: Instruction[]): ProgramResult {
   let acc = 0
 
   // Run the program.
-  while (true) {
+  while (line < program.length) {
     // Execute the current instruction.
     const [op, arg] = program[line]
     switch (op) {
@@ -67,15 +67,15 @@ export function run(program: Instruction[]): ProgramResult {
         break
     }
 
-    // If the instruction pointer has been incremented of bounds, complete execution.
-    if (line >= program.length) return [ExitCode.Completed, acc]
-
     // If this line has been executed before, temrinate program with infinite loop exit code.
     if (visited.has(line)) return [ExitCode.InfiniteLoop, acc]
 
     // Mark that this line has been executed.
     visited.add(line)
   }
+
+  // Program completed!
+  return [ExitCode.Completed, acc]
 }
 
 /** Solve puzzle, part 1 */
