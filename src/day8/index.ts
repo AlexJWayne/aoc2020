@@ -1,5 +1,10 @@
+/** A list of supported operations. */
 const validOps = ["nop", "acc", "jmp"] as const
+
+/** A union of supported operations. */
 type Op = typeof validOps[number]
+
+/** A parsed instruction including an operation and an argument. */
 type Instruction = [op: Op, arg: number]
 
 /** Dtermines the status of the program execution. */
@@ -11,7 +16,11 @@ export enum ExitCode {
   InfiniteLoop,
 }
 
-type Result = [ExitCode: ExitCode, acc: number]
+/**
+ * The result of a program execution incoude an exit code to convery successfulness, and the
+ * value of the accumulator when the program exited.
+ */
+type ProgramResult = [ExitCode: ExitCode, acc: number]
 
 /** Type guard that ensure that an op code is valid. */
 function isValidOp(op: string): op is Op {
@@ -31,7 +40,7 @@ export function parseInstruction(line: string): Instruction {
 }
 
 /** Executes a program and returns an exit code and the value of it's acculator. */
-export function run(program: Instruction[]): Result {
+export function run(program: Instruction[]): ProgramResult {
   // Kepe track of what lines have been executed in order to detect infinite loops.
   const visited: Set<Number> = new Set()
 
