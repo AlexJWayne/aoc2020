@@ -48,26 +48,22 @@ export function findContiguousSum(sum: number, numbers: number[]): number[] {
   let end = 0 // end of search range
   let total = 0 // sum of search range
 
-  // Loop until the ending index is out of bounds.
-  while (end < numbers.length) {
-    // Add numbers from the end of the current search.
-    total += numbers[end]
-    end++
-
-    // Check for victory.
-    if (total === sum) return numbers.slice(start, end)
-
-    // Substract numbers from the start of the range if total is greater than sum.
-    while (total > sum) {
+  while (total !== sum) {
+    if (total < sum) {
+      // Add numbers from the end when total is under the sum.
+      total += numbers[end]
+      end++
+    } else {
+      // Subtract numbers from the start when total is over the sum.
       total -= numbers[start]
       start++
-
-      // Check for victory.
-      if (total === sum) return numbers.slice(start, end)
     }
+
+    // End of input reach, bail out.
+    if (end > numbers.length) throw new Error(`No digits sum up to: ${sum}`)
   }
 
-  throw new Error(`No digits sum up to: ${sum}`)
+  return numbers.slice(start, end)
 }
 
 /** Solve puzzle, part 1 */
