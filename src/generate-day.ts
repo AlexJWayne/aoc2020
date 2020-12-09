@@ -10,14 +10,12 @@ import { solve1, solve2 } from "."
 describeDay(
   ${day},
   {
-    // solve: solve1,
-    // example: 1,
-    // puzzle: 1,
+    // example: [solve1, 1],
+    // puzzle: [solve1, 1],
   },
   {
-    // solve: solve2,
-    // example: 1,
-    // puzzle: 1,
+    // example: [solve2, 1],
+    // puzzle: [solve2, 1],
   },
   () => {
     //...

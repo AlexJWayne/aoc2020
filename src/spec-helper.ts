@@ -3,16 +3,15 @@ import { readInput, readExample } from "./read-files"
 /** Use this as the value of `example` to completely omit it from the tests. */
 export const ignore = Symbol("ignore")
 
+type TestSetup = [runner: (input: string) => number, expected: number]
+
 /** A day parts solver, and expected example/puzzle answers to test. */
 interface TestPart {
-  /** The function that executes this part's algorithm. */
-  solve?: (input: string) => number
-
   /** The expected result from example. */
-  example?: number | typeof ignore
+  example?: TestSetup | typeof ignore
 
   /** The expect result for the puzzle input. */
-  puzzle?: number
+  puzzle?: TestSetup
 }
 
 /**
@@ -41,21 +40,27 @@ export function describeDay(
 function testPart(
   name: number,
   directory: string,
-  { solve, example, puzzle }: TestPart,
+  { example, puzzle }: TestPart,
 ) {
   describe(`part ${name}`, () => {
     if (example !== ignore) {
-      const itExample = solve && example ? it : it.skip
-      itExample("finds the example answer", () => {
-        const actual = solve!(readExample(directory, name))
-        expect(actual).toEqual(example)
-      })
+      testInput("example", example, readExample(directory, name))
     }
 
-    const itPuzzle = solve && puzzle ? it : it.skip
-    itPuzzle("finds the puzzle answer", () => {
-      const actual = solve!(readInput(directory))
-      expect(actual).toEqual(puzzle)
-    })
+    testInput("puzzle", puzzle, readInput(directory))
+  })
+}
+
+/** Run a single test of a solver, input and expected result. */
+function testInput(
+  description: string,
+  testSetup: TestSetup | undefined,
+  input: string,
+) {
+  const itFn = testSetup ? it : it.skip
+  const [solve, expected] = testSetup ?? []
+  itFn(`finds the ${description} answer`, () => {
+    const actual = solve!(input)
+    expect(actual).toEqual(expected)
   })
 }
