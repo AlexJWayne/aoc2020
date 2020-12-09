@@ -44,17 +44,26 @@ export function findFishyNumber(
  * @param numbers The array of numbers to search.
  */
 export function findContiguousSum(sum: number, numbers: number[]): number[] {
-  let total = 0
+  let start = 0 // start of search range
+  let end = 0 // end of search range
+  let total = 0 // sum of search range
 
-  for (let i = 0; i < numbers.length; i++) {
-    total = numbers[i]
+  // Loop until the ending index is out of bounds.
+  while (end < numbers.length) {
+    // Add numbers from the end of the current search.
+    total += numbers[end]
+    end++
 
-    for (let j = i + 1; j < numbers.length || total > sum; j++) {
-      total += numbers[j]
+    // Check for victory.
+    if (total === sum) return numbers.slice(start, end)
 
-      if (total === sum) {
-        return numbers.slice(i, j + 1)
-      }
+    // Substract numbers from the start of the range if total is greater than sum.
+    while (total > sum) {
+      total -= numbers[start]
+      start++
+
+      // Check for victory.
+      if (total === sum) return numbers.slice(start, end)
     }
   }
 
