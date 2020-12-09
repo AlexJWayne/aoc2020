@@ -48,7 +48,7 @@ export function findContiguousSum(sum: number, numbers: number[]): number[] {
   let end = 0 // end of search range
   let total = 0 // sum of search range
 
-  while (total !== sum) {
+  while (total !== sum || end - start <= 1) {
     if (total < sum) {
       // Add numbers from the end when total is under the sum.
       total += numbers[end]

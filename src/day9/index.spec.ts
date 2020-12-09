@@ -44,6 +44,10 @@ describeDay(
         expect(findContiguousSum(11, [1, 2, 3, 4, 5, 6])).toEqual([5, 6]) // end
         expect(findContiguousSum(12, [1, 2, 3, 4, 5, 6])).toEqual([3, 4, 5]) // middle
       })
+
+      it("must return at least 2 numbers", () => {
+        expect(() => findContiguousSum(2, [1, 2, 3, 4, 5])).toThrow()
+      })
     })
   },
 )
