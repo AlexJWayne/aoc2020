@@ -5,14 +5,12 @@ import { findSumProduct2, findSumProduct3, solve1, solve2 } from "."
 describeDay(
   1,
   {
-    solve: solve1,
-    example: 514579,
-    puzzle: 158916,
+    example: [solve1, 514579],
+    puzzle: [solve1, 158916],
   },
   {
-    solve: solve2,
-    example: 241861950,
-    puzzle: 165795564,
+    example: [solve2, 241861950],
+    puzzle: [solve2, 165795564],
   },
   () => {
     describe("findSumProduct2", () => {

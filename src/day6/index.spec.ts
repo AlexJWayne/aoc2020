@@ -4,14 +4,12 @@ import { countAnd, countOr, solve1, solve2 } from "."
 describeDay(
   6,
   {
-    solve: solve1,
-    example: 11,
-    puzzle: 6532,
+    example: [solve1, 11],
+    puzzle: [solve1, 6532],
   },
   {
-    solve: solve2,
-    example: 6,
-    puzzle: 3427,
+    example: [solve2, 6],
+    puzzle: [solve2, 3427],
   },
   () => {
     describe("countOr", () => {

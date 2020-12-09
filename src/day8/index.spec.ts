@@ -4,14 +4,12 @@ import { ExitCode, parseInstruction, run, solve1, solve2 } from "."
 describeDay(
   8,
   {
-    solve: solve1,
-    example: 5,
-    puzzle: 1475,
+    example: [solve1, 5],
+    puzzle: [solve1, 1475],
   },
   {
-    solve: solve2,
-    example: 8,
-    puzzle: 1270,
+    example: [solve2, 8],
+    puzzle: [solve2, 1270],
   },
   () => {
     describe("parseInstruction", () => {

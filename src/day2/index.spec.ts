@@ -10,14 +10,12 @@ import {
 describeDay(
   2,
   {
-    solve: solve1,
-    example: 2,
-    puzzle: 398,
+    example: [solve1, 2],
+    puzzle: [solve1, 398],
   },
   {
-    solve: solve2,
-    example: 1,
-    puzzle: 562,
+    example: [solve2, 1],
+    puzzle: [solve2, 562],
   },
   () => {
     describe("parseLine", () => {

@@ -4,14 +4,12 @@ import { count, parseCountedBag, parseLines, search, solve1, solve2 } from "."
 describeDay(
   7,
   {
-    solve: solve1,
-    example: 4,
-    puzzle: 229,
+    example: [solve1, 4],
+    puzzle: [solve1, 229],
   },
   {
-    solve: solve2,
-    example: 126,
-    puzzle: 6683,
+    example: [solve2, 126],
+    puzzle: [solve2, 6683],
   },
   () => {
     describe("search", () => {

@@ -4,14 +4,12 @@ import { countTrees, solve1, solve2 } from "."
 describeDay(
   3,
   {
-    solve: solve1,
-    example: 7,
-    puzzle: 176,
+    example: [solve1, 7],
+    puzzle: [solve1, 176],
   },
   {
-    solve: solve2,
-    example: 336,
-    puzzle: 5872458240,
+    example: [solve2, 336],
+    puzzle: [solve2, 5872458240],
   },
   () => {
     describe("countTrees", () => {

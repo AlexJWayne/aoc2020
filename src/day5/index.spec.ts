@@ -4,14 +4,12 @@ import { solve1, solve2, toInt } from "."
 describeDay(
   5,
   {
-    solve: solve1,
-    example: 820,
-    puzzle: 953,
+    example: [solve1, 820],
+    puzzle: [solve1, 953],
   },
   {
-    solve: solve2,
     example: ignore,
-    puzzle: 615,
+    puzzle: [solve2, 615],
   },
   () => {
     describe("toInt", () => {
